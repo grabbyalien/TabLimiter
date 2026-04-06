@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Tab Limiter",
+  "version": "1.0",
+  "description": "Limits the number of tabs you can keep open at the same time to help you stay focused.",
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Tab Limiter Settings"
+  }
+}
