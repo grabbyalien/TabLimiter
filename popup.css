@@ -69,8 +69,16 @@ button {
   transition: background-color 0.2s;
 }
 
-button:hover {
+button:hover:not(:disabled) {
   background-color: #0056b3;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+#lock:hover:not(:disabled) {
+  background-color: #cc0000 !important;
 }
 
 #status {

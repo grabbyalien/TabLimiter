@@ -15,7 +15,21 @@
     </div>
     
     <button id="save">Save Limit</button>
-    <div id="status"></div>
+
+    <div class="lock-group" style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px;">
+      <label for="lockDuration" style="display: block; margin-bottom: 5px;">Lock Limit For:</label>
+      <select id="lockDuration" style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 4px; border: 1px solid #ccc;">
+        <option value="1">1 Hour</option>
+        <option value="2">2 Hours</option>
+        <option value="4">4 Hours</option>
+        <option value="8">8 Hours</option>
+        <option value="12">12 Hours</option>
+        <option value="24">24 Hours</option>
+      </select>
+      <button id="lock" style="background-color: #ff4444; width: 100%;">Lock Limit</button>
+    </div>
+
+    <div id="status" style="margin-top: 10px; text-align: center; font-weight: 500;"></div>
   </div>
   <script src="popup.js"></script>
 </body>
