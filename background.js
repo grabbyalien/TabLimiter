@@ -23,6 +23,44 @@ chrome.tabs.onCreated.addListener(async (tab) => {
   // If we have more tabs than the limit, remove the newly created one
   if (tabs.length > maxTabs) {
     chrome.tabs.remove(tab.id);
+    
+    // Show a message on the active tab
+    const activeTabs = await chrome.tabs.query({ active: true, currentWindow: true });
+    if (activeTabs.length > 0) {
+      chrome.scripting.executeScript({
+        target: { tabId: activeTabs[0].id },
+        func: () => {
+          // Create the toast element
+          const toast = document.createElement('div');
+          toast.textContent = "Maximum tab limit reached!";
+          
+          // Style the toast
+          toast.style.position = 'fixed';
+          toast.style.top = '20px';
+          toast.style.left = '50%';
+          toast.style.transform = 'translateX(-50%)';
+          toast.style.backgroundColor = '#ff4444';
+          toast.style.color = 'white';
+          toast.style.padding = '12px 24px';
+          toast.style.borderRadius = '8px';
+          toast.style.zIndex = '2147483647'; // Max z-index
+          toast.style.fontFamily = 'system-ui, -apple-system, sans-serif';
+          toast.style.fontSize = '16px';
+          toast.style.fontWeight = '500';
+          toast.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+          toast.style.transition = 'opacity 0.3s ease-in-out';
+          toast.style.pointerEvents = 'none'; // Don't block clicks
+          
+          document.body.appendChild(toast);
+          
+          // Fade out and remove after 3 seconds
+          setTimeout(() => {
+            toast.style.opacity = '0';
+            setTimeout(() => toast.remove(), 300);
+          }, 3000);
+        }
+      }).catch(err => console.log("Could not inject script (likely a restricted page):", err));
+    }
   }
   
   checkTabCount();

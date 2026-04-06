@@ -5,7 +5,11 @@
   "description": "Limits the number of tabs you can keep open at the same time to help you stay focused.",
   "permissions": [
     "tabs",
-    "storage"
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>"
   ],
   "background": {
     "service_worker": "background.js"
